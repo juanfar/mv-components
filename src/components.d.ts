@@ -10,6 +10,10 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
+  interface MvSelect {
+    'options': string;
+    'type': string;
+  }
   interface MyComponent {
     /**
     * The first name
@@ -29,17 +33,28 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLMvSelectElement extends Components.MvSelect, HTMLStencilElement {}
+  var HTMLMvSelectElement: {
+    prototype: HTMLMvSelectElement;
+    new (): HTMLMvSelectElement;
+  };
+
   interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
   var HTMLMyComponentElement: {
     prototype: HTMLMyComponentElement;
     new (): HTMLMyComponentElement;
   };
   interface HTMLElementTagNameMap {
+    'mv-select': HTMLMvSelectElement;
     'my-component': HTMLMyComponentElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface MvSelect {
+    'options'?: string;
+    'type'?: string;
+  }
   interface MyComponent {
     /**
     * The first name
@@ -56,6 +71,7 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'mv-select': MvSelect;
     'my-component': MyComponent;
   }
 }
@@ -66,6 +82,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'mv-select': LocalJSX.MvSelect & JSXBase.HTMLAttributes<HTMLMvSelectElement>;
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
     }
   }

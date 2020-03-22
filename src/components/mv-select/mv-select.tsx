@@ -28,7 +28,7 @@ export class MvSelect {
 
 		optionsList.forEach((o) => {
 			o.addEventListener('click', () => {
-				selected.innerHTML = o.querySelector('label').innerHTML;
+				selected.querySelector('p').innerHTML = o.querySelector('label').innerHTML;
 				optionsContainer.classList.remove('active');
 			});
 		});
@@ -96,7 +96,7 @@ export class MvSelect {
 							</div>
 						</div>
 						<div class="selected">
-							Select Video Category
+							<p>Select Video Category</p>
 							<img src={getAssetPath(`./assets/arrow-down.svg`)} />
 						</div>
 					</div>

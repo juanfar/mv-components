@@ -11,7 +11,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface MvSelect {
-    'options': string;
+    'options': string[];
     'type': string;
   }
   interface MyComponent {
@@ -52,7 +52,7 @@ declare global {
 
 declare namespace LocalJSX {
   interface MvSelect {
-    'options'?: string;
+    'options'?: string[];
     'type'?: string;
   }
   interface MyComponent {

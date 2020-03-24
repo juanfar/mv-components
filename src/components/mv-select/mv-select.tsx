@@ -27,6 +27,12 @@ export class MvSelect {
 				optionsContainer.classList.remove('active');
 			});
 		});
+
+		if (this.type === 'buscador') {
+			optionsContainer.classList.add('withSearch');
+		} else {
+			optionsContainer.classList.remove('withSearch');
+		}
 	}
 
 	render() {
@@ -45,6 +51,12 @@ export class MvSelect {
 						<p>Seleccionar opción ...</p>
 						<img src={getAssetPath(`./assets/arrow-down.svg`)} />
 					</div>
+					{this.type === 'buscador' ?
+						<div class="search-box">
+							<input type="text" placeholder="Comienza a escribir..." />
+						</div>
+						: ''
+					}
 				</div>
 			</div>
 		);

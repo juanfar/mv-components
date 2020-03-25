@@ -8,17 +8,26 @@ import { Component, Element, Prop, getAssetPath, h } from '@stencil/core';
 })
 export class MvSelect {
 	@Element() private element: HTMLElement;
-	@Prop() options: string[];
-	@Prop() type: string;
+	@Prop() options: string[] = [];
+	@Prop() type: string = 'default';
 
 	componentDidLoad() {
-		console.log('this.options -> ', this.options);
 		const selected = this.element.shadowRoot.querySelector('.selected');
 		const optionsContainer = this.element.shadowRoot.querySelector('.options-container');
 		const optionsList = this.element.shadowRoot.querySelectorAll('.option');
+		const searchBox = this.element.shadowRoot.querySelector('.search-box input');
 
 		selected.addEventListener('click', () => {
 			optionsContainer.classList.toggle('active');
+
+			if (this.type === 'bucador'){
+				(searchBox as HTMLTextAreaElement).value = '';
+			this.filterList('', optionsList);
+			}
+			
+			if (optionsContainer.classList.contains('active') && this.type === 'buscador') {
+				(searchBox as HTMLTextAreaElement).focus();
+			}
 		});
 
 		optionsList.forEach((o) => {
@@ -30,9 +39,24 @@ export class MvSelect {
 
 		if (this.type === 'buscador') {
 			optionsContainer.classList.add('withSearch');
+			searchBox.addEventListener('keyup', (event) => {
+				this.filterList((event.target as HTMLTextAreaElement).value, optionsList);
+			});
 		} else {
 			optionsContainer.classList.remove('withSearch');
 		}
+	}
+
+	filterList(value, optionsList) {
+		value = value.toLowerCase();
+		optionsList.forEach(option => {
+			let label = option.firstElementChild.nextElementSibling.innerText.toLowerCase();
+			if (label.indexOf(value) != -1) {
+				option.style.display = 'block';
+			} else {
+				option.style.display = 'none';
+			}
+		});
 	}
 
 	render() {

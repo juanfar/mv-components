@@ -9,8 +9,8 @@
 
 | Property  | Attribute | Description | Type       | Default     |
 | --------- | --------- | ----------- | ---------- | ----------- |
-| `options` | --        |             | `string[]` | `undefined` |
-| `type`    | `type`    |             | `string`   | `undefined` |
+| `options` | --        |             | `string[]` | `[]`        |
+| `type`    | `type`    |             | `string`   | `'default'` |
 
 
 ----------------------------------------------
